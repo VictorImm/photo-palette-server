@@ -1,5 +1,8 @@
-const dotenv = require('dotenv');
-dotenv.config();
+// environment variable
+require('dotenv').config();
+const PORT = process.env.PORT;
+// ====================
+
 
 const express = require('express');
 const port = process.env.PORT || 8000
@@ -10,25 +13,36 @@ app.use(express.urlencoded({extended : false}));
 
 
 // logger middleware
-const logger = require('./middleware/logger');
+const logger = require('./src/middleware/logger');
 app.use(logger);
 // ====================
 
 
 // router
-const auth = require('./routes/auth');
+const auth = require('./src/routes/auth');
 app.use('/auth', auth);
+// ====================
 
-const test = require('./routes/test_auth');
-app.use('/test', test);
+
+// default request
+app.get('/', (req, res) => {
+    res.status(403).send(`
+        <html>
+        <head><title>403 Forbidden</title></head>
+        <body style="text-align: center; font-family: Arial;">
+            <img src="https://http.cat/403.jpg" alt="403 Forbidden" width="500px">
+        </body>
+        </html>
+    `);
+})
 // ====================
 
 
 // error handler middleware
-const errorNoFound = require('./middleware/err_nofound');
+const errorNoFound = require('./src/middleware/errNoFound');
 app.use(errorNoFound)
 
-const errorHandler = require('./middleware/err_handler');
+const errorHandler = require('./src/middleware/errHandler');
 app.use(errorHandler)
 // ====================
 
