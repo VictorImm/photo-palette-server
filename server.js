@@ -13,13 +13,13 @@ app.use(express.urlencoded({extended : false}));
 
 
 // logger middleware
-const logger = require('./src/middleware/logger');
+const logger = require('./src/middleware/mid-logger');
 app.use(logger);
 // ====================
 
 
 // router
-const auth = require('./src/routes/auth');
+const auth = require('./src/routes/rts-auth');
 app.use('/auth', auth);
 // ====================
 
@@ -39,10 +39,10 @@ app.get('/', (req, res) => {
 
 
 // error handler middleware
-const errorNoFound = require('./src/middleware/errNoFound');
+const errorNoFound = require('./src/middleware/mid-err-nofound');
 app.use(errorNoFound)
 
-const errorHandler = require('./src/middleware/errHandler');
+const errorHandler = require('./src/middleware/mid-err-handler');
 app.use(errorHandler)
 // ====================
 

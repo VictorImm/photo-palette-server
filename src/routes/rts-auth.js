@@ -4,7 +4,7 @@ dotenv.config();
 const express = require('express');
 const router = express.Router();
 
-const controllerAuth = require("../controller/auth")
+const controllerAuth = require("../controller/ctrl-auth")
 
 router.post('/signin',  controllerAuth.postSignIn);
 router.post('/signup',  controllerAuth.postSignUp);

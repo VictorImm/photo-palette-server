@@ -39,7 +39,6 @@ const userSignIn = async (username, password) => {
             return { success: false, message: "Invalid Password!" };
         }
     } catch (e) {
-        console.error("❌ Query error in userSignIn:", e.message, e.stack);
         throw e;
     }
 }
