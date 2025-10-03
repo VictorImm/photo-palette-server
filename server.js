@@ -21,6 +21,9 @@ app.use(logger);
 // router
 const auth = require('./src/routes/rts-auth');
 app.use('/auth', auth);
+
+const palette = require('./src/routes/rts-palette');
+app.use('/palette', palette);
 // ====================
 
 
