@@ -69,25 +69,7 @@ const userSignUp = async (email, username, password) => {
     }
 }
 
-const userExist = async (username) => {
-    try {
-        const result = await pool.query(
-            `SELECT COUNT(1) AS exists FROM m_users WHERE username = $1`,
-            [username]
-        );
-
-        if (parseInt(result.rows[0].exists) > 0) {
-            return { success: false, message: "Username Already Exists!" };
-        } else {
-            return { success: true };
-        }
-    } catch (e) {
-        throw e;
-    }
-}
-
 module.exports = {
     userSignIn,
-    userSignUp,
-    userExist
+    userSignUp
 }
