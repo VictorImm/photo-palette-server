@@ -55,7 +55,36 @@ const paletteDetail = async (id) => {
     }
 }
 
+const uploadPalette = async (hex, created_by) => {
+    try {
+        await pool.query(
+            `INSERT INTO m_palette (hex, created_by)
+                VALUES ($1, $2)`,
+            [hex, created_by]
+        );
+
+        return { success: true, message: "Palette uploaded successfully" };
+    } catch (e) {
+        throw e;
+    }
+}
+
+const deletePalette = async (id) => {
+    try {
+        await pool.query(
+            `DELETE FROM m_palette WHERE id=$1`,
+            [id]
+        );
+
+        return { success: true, message: "Palette deleted successfully" };
+    } catch (e) {
+        throw e;
+    }
+}
+
 module.exports = {
     paletteList,
-    paletteDetail
+    paletteDetail,
+    uploadPalette,
+    deletePalette
 }

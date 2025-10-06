@@ -18,13 +18,13 @@ const postSignIn = async (req, res, next) => {
         const token = jwt.sign(
             { username },
             process.env.TOKEN_SECRET,
-            { expiresIn: '30s' }
+            { expiresIn: '300s' }
         );
     
         res.status(200).json({
             success: true,
             data: { token },
-            message: "Success Retrieved Data"
+            message: res.message
         });
     } else {
         const error = new Error(result.message);
@@ -49,7 +49,6 @@ const postSignUp = async (req, res, next) => {
     if (result.success) {    
         res.status(200).json({
             success: true,
-            data: { token },
             message: "Success Retrieved Data"
         });
     } else {
