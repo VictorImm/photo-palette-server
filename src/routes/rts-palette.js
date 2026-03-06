@@ -14,11 +14,11 @@ const authToken = require('../middleware/mid-auth');
 const controllerPalette = require("../controller/ctrl-palette");
 
 router.get('/', authToken, controllerPalette.getPaletteList);
-router.get('/:id', authToken, controllerPalette.getPalette);
 
 router.post('/extract', authToken, upload.single('file'), controllerPalette.extractPalette);
 router.post('/save', authToken, controllerPalette.savePalette);
 
+router.get('/:id', authToken, controllerPalette.getPalette);
 router.delete('/:id', authToken, controllerPalette.deletePalette);
 
 module.exports = router;
