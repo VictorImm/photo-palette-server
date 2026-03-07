@@ -1,22 +1,10 @@
 require('dotenv').config();
 
-let Pool, pool;
+const { Pool } = require("@neondatabase/serverless");
 
-if (process.env.VERCEL) {
-    // Running on Vercel → gunakan serverless driver
-    ({ Pool } = require("@neondatabase/serverless"));
-    pool = new Pool({
-        connectionString: process.env.DB_URL,
-        ssl: { require: true }
-    });
-} else {
-    // Running locally (Node.js backend) → gunakan pg biasa
-    ({ Pool } = require("pg"));
-    pool = new Pool({
-        connectionString: process.env.DB_URL,
-        ssl: { rejectUnauthorized: false }
-    });
-}
+const pool = new Pool({
+  connectionString: process.env.PHOPAL_DATABASE_URL
+});
 
 const SALT = parseInt(process.env.SALT);
 const bcrypt = require('bcrypt');
