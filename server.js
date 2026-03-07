@@ -49,4 +49,5 @@ const errorHandler = require('./src/middleware/mid-err-handler');
 app.use(errorHandler)
 // ====================
 
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+module.exports = app;
+// app.listen(port, () => console.log(`Server is running on port ${port}`));
