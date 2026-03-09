@@ -55,7 +55,7 @@ const savePalette = async (req, res, next) => {
     const { hex, token } = req.body;
     if (!hex || !token) {
         const error = new Error(`Body Request Incomplete!`);
-        error.status = 401;
+        error.status = 500;
         return next(error);
     }
 
@@ -106,7 +106,7 @@ const extractPalette = async (req, res, next) => {
     const file = req.file;
     if (!file) {
         const error = new Error(`Body Request Incomplete!`);
-        error.status = 401;
+        error.status = 500;
         return next(error);
     }
 

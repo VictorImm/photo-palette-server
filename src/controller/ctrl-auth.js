@@ -6,7 +6,7 @@ const postSignIn = async (req, res, next) => {
     const { username, password } = req.body;
     if (!username || !password) {
         const error = new Error(`Body Request Incomplete!`);
-        error.status = 401;
+        error.status = 500;
         return next(error);
     }
 
@@ -37,7 +37,7 @@ const postSignUp = async (req, res, next) => {
     const { email, username, password } = req.body;
     if (!email || !username || !password) {
         const error = new Error(`Body Request Incomplete!`);
-        error.status = 401;
+        error.status = 500;
         return next(error);
     }
 
