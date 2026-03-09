@@ -1,6 +1,8 @@
 const modelPalette = require("../model/mod-palette");
 const { Vibrant } = require('node-vibrant/node');
 
+const jwt = require('jsonwebtoken');
+
 const getPaletteList = async (req, res, next) => {
     const username = req.query.username;
     if (!username ) {
@@ -50,12 +52,15 @@ const getPalette = async (req, res, next) => {
 };
 
 const savePalette = async (req, res, next) => {
-    const { hex, created_by } = req.body;
-    if (!hex || !created_by) {
+    const { hex, token } = req.body;
+    if (!hex || !token) {
         const error = new Error(`Body Request Incomplete!`);
         error.status = 401;
         return next(error);
     }
+
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+    const created_by = decoded.username;
 
     const result = await modelPalette.uploadPalette(
         hex,
